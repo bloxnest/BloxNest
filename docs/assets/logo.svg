@@ -1,0 +1,6 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="BloxNest logo">
+  <g transform="rotate(15 128 128)">
+    <path fill="#A3AB9C" d="M26,32 H184 V60 H54 V184 H26 Z"/>
+    <path fill="#D5F478" fill-rule="evenodd" d="M72,72 H230 V224 H72 Z M102,124 H200 V194 H102 Z M96,92 H106 V102 H96 Z M116,92 H126 V102 H116 Z"/>
+  </g>
+</svg>

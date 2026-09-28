@@ -1,0 +1,1144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BloxNest — open multiple Roblox windows</title>
+  <meta name="description"
+        content="BloxNest is a free, open-source Windows app by xRed1 that opens multiple Roblox windows. Windows 10 and 11. About 160 KB, with no installer.">
+  <meta name="theme-color" content="#171A16">
+  <meta name="color-scheme" content="dark">
+
+  <link rel="canonical" href="https://yub1dumb.github.io/BloxNest/">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="BloxNest">
+  <meta property="og:title" content="BloxNest — open multiple Roblox windows">
+  <meta property="og:description"
+        content="A free, open-source Windows app by xRed1. Open multiple Roblox windows and use a different account in each.">
+  <meta property="og:url" content="https://yub1dumb.github.io/BloxNest/">
+  <meta property="og:image"
+        content="https://yub1dumb.github.io/BloxNest/assets/app-main.png">
+  <meta property="og:image:width" content="440">
+  <meta property="og:image:height" content="444">
+  <meta property="og:image:alt"
+        content="BloxNest's main window reporting six Roblox windows running.">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BloxNest — open multiple Roblox windows">
+  <meta name="twitter:description"
+        content="A small, free, open-source Windows app by xRed1. Windows 10 and 11, with no installer.">
+  <meta name="twitter:image"
+        content="https://yub1dumb.github.io/BloxNest/assets/app-main.png">
+  <meta name="twitter:image:alt"
+        content="BloxNest's main window reporting six Roblox windows running.">
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #171A16;
+      --surface: #21261E;
+      --border: #2B3228;
+      --border-strong: #333B2D;
+      --text: #EEF1E9;
+      --muted: #A3AB9C;
+      --quiet: #929C89;
+      --lime: #D5F478;
+      --lime-text: #17200C;
+      --font: "Segoe UI", system-ui, -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-padding-top: 24px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      background: var(--lime);
+      color: var(--lime-text);
+    }
+
+    a {
+      color: var(--lime);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 4px;
+      overflow-wrap: anywhere;
+    }
+
+    a:hover {
+      text-decoration-thickness: 2px;
+    }
+
+    a,
+    summary {
+      touch-action: manipulation;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--lime);
+      outline-offset: 5px;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    h1,
+    h2,
+    h3,
+    p,
+    figure {
+      margin: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.18;
+      font-weight: 700;
+    }
+
+    h1 {
+      max-width: 13ch;
+      font-size: clamp(2.25rem, 4.4vw, 3.65rem);
+      letter-spacing: -.035em;
+    }
+
+    h2 {
+      font-size: clamp(1.65rem, 3vw, 2.15rem);
+      letter-spacing: -.025em;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      line-height: 1.4;
+    }
+
+    p + p {
+      margin-top: 14px;
+    }
+
+    strong {
+      color: var(--text);
+      font-weight: 650;
+    }
+
+    .container {
+      width: min(1080px, calc(100% - 48px));
+      margin-inline: auto;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 10;
+      padding: 12px 18px;
+      border-radius: 6px;
+      background: var(--lime);
+      color: var(--lime-text);
+      font-weight: 700;
+      transform: translateY(-180%);
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .site-header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px 24px;
+      min-height: 84px;
+      padding-block: 16px;
+      border-bottom: 1px solid var(--border-strong);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 44px;
+      color: var(--text);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -.025em;
+      text-decoration: none;
+    }
+
+    .brand img {
+      flex: 0 0 auto;
+      width: 33px;
+      height: 33px;
+    }
+
+    .navigation {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 16px;
+    }
+
+    .navigation a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 6px 4px;
+      color: var(--muted);
+      font-size: .9375rem;
+      text-decoration: none;
+    }
+
+    .navigation a:hover {
+      color: var(--lime);
+      text-decoration: underline;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      align-items: center;
+      gap: 48px;
+      padding-block: 60px;
+    }
+
+    .byline {
+      margin-bottom: 16px;
+      color: var(--muted);
+      font-size: .9375rem;
+    }
+
+    h1 span {
+      color: var(--lime);
+    }
+
+    .hero-description {
+      max-width: 48ch;
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 1.125rem;
+    }
+
+    .launch-note {
+      max-width: 53ch;
+      margin-top: 16px;
+      color: var(--muted);
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      margin-top: 24px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 50px;
+      padding: 12px 20px;
+      border: 1px solid var(--lime);
+      border-radius: 7px;
+      background: var(--lime);
+      color: var(--lime-text);
+      font: inherit;
+      font-weight: 700;
+      line-height: 1.4;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .button svg {
+      flex: 0 0 auto;
+    }
+
+    .button:hover {
+      background: #E0FA99;
+      border-color: #E0FA99;
+      text-decoration: none;
+    }
+
+    .action-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
+
+    .download-meta {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: .9375rem;
+    }
+
+    .download-warning {
+      max-width: 54ch;
+      margin-top: 16px;
+      padding-left: 14px;
+      border-left: 2px solid var(--lime);
+      color: var(--muted);
+      font-size: .9375rem;
+    }
+
+    .screenshot {
+      width: 100%;
+      max-width: 440px;
+      margin-inline: auto;
+      min-width: 0;
+    }
+
+    .screenshot img {
+      width: 100%;
+      border: 1px solid var(--border-strong);
+      border-radius: 10px;
+      box-shadow: 0 12px 28px rgb(0 0 0 / 16%);
+    }
+
+    figcaption {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: .875rem;
+    }
+
+    figcaption a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
+
+    .section {
+      padding-block: 48px;
+      border-top: 1px solid var(--border-strong);
+    }
+
+    .section-intro {
+      max-width: 68ch;
+      margin-top: 14px;
+      color: var(--muted);
+    }
+
+    .setup-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      align-items: start;
+      gap: 40px;
+      margin-top: 28px;
+    }
+
+    .steps {
+      margin: 0;
+      padding-left: 26px;
+    }
+
+    .steps li {
+      padding-left: 8px;
+    }
+
+    .steps li + li {
+      margin-top: 24px;
+    }
+
+    .steps li::marker {
+      color: var(--lime);
+      font-weight: 700;
+    }
+
+    .steps p {
+      margin-top: 8px;
+      color: var(--muted);
+    }
+
+    .first-run {
+      padding: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: 9px;
+    }
+
+    .first-run h3 {
+      margin-bottom: 12px;
+    }
+
+    .first-run p {
+      color: var(--muted);
+    }
+
+    .settings-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      align-items: start;
+      gap: 48px;
+    }
+
+    .settings-list {
+      margin: 24px 0 0;
+    }
+
+    .settings-list > div {
+      padding-block: 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    dt {
+      color: var(--text);
+      font-weight: 650;
+      line-height: 1.4;
+    }
+
+    dd {
+      margin: 8px 0 0;
+      color: var(--muted);
+    }
+
+    .privacy-layout {
+      display: grid;
+      grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+      gap: 48px;
+    }
+
+    .privacy-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 24px;
+      margin-top: 16px;
+    }
+
+    .privacy-links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
+
+    .privacy-list {
+      margin: 0;
+    }
+
+    .privacy-list > div + div {
+      margin-top: 22px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
+    }
+
+    .faq-list {
+      max-width: 850px;
+      margin-top: 24px;
+      border-top: 1px solid var(--border-strong);
+    }
+
+    details {
+      border-bottom: 1px solid var(--border-strong);
+    }
+
+    summary {
+      padding: 18px 8px 18px 0;
+      cursor: pointer;
+      font-weight: 650;
+      line-height: 1.5;
+    }
+
+    summary::marker {
+      color: var(--lime);
+    }
+
+    summary:hover,
+    details[open] summary {
+      color: var(--lime);
+    }
+
+    details p {
+      max-width: 75ch;
+      padding: 0 12px 20px 0;
+      color: var(--muted);
+    }
+
+    .download-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px 32px;
+    }
+
+    .download-heading {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-width: 0;
+    }
+
+    .download-heading img {
+      flex: 0 0 auto;
+      width: 48px;
+      height: 48px;
+    }
+
+    .download-heading h2 {
+      font-size: 1.4rem;
+    }
+
+    .download-heading p {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: .9375rem;
+    }
+
+    .download-section .actions {
+      margin-top: 0;
+    }
+
+    .download-reminder {
+      flex-basis: 100%;
+      margin: 0;
+      color: var(--muted);
+      font-size: .9375rem;
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--border-strong);
+      padding-block: 24px 32px;
+      color: var(--muted);
+      font-size: .875rem;
+    }
+
+    .footer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 20px;
+    }
+
+    .footer-links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
+
+    .disclaimer {
+      max-width: 75ch;
+      margin-top: 16px;
+    }
+
+    .story-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+      gap: 48px;
+      align-items: start;
+    }
+
+    .story p {
+      max-width: 62ch;
+      margin-top: 14px;
+      color: var(--muted);
+    }
+
+    .donate-card {
+      padding: 24px;
+      border: 1px solid var(--border-strong);
+      border-radius: 12px;
+      background: var(--surface);
+    }
+
+    .donate-card h3 {
+      font-size: 16px;
+    }
+
+    .donate-card p {
+      margin-top: 8px;
+      color: var(--muted);
+    }
+
+    .donate-email {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      margin-top: 8px;
+      color: var(--lime);
+      font-weight: 600;
+      overflow-wrap: anywhere;
+    }
+
+    .donate-note {
+      font-size: 13px;
+      color: var(--quiet);
+    }
+
+    @media (max-width: 800px) {
+      .hero,
+      .settings-layout,
+      .privacy-layout {
+        gap: 32px;
+      }
+
+      .hero {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+      }
+
+      .setup-layout {
+        gap: 24px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        width: calc(100% - 40px);
+      }
+
+      .hero,
+      .setup-layout,
+      .settings-layout,
+      .privacy-layout,
+      .story-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero {
+        padding-block: 36px 40px;
+      }
+
+      h1 {
+        max-width: 16ch;
+      }
+
+      .hero-description {
+        font-size: 1.0625rem;
+      }
+
+      .section {
+        padding-block: 36px;
+      }
+
+      .screenshot {
+        max-width: 440px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .site-header .container {
+        align-items: flex-start;
+        gap: 4px;
+        padding-block: 12px;
+      }
+
+      .navigation {
+        width: 100%;
+        justify-content: space-between;
+        gap: 0 8px;
+      }
+
+      .navigation a {
+        font-size: .875rem;
+      }
+
+      .hero .actions,
+      .download-section .actions {
+        align-items: stretch;
+        width: 100%;
+      }
+
+      .hero .button,
+      .download-section .button {
+        width: 100%;
+      }
+
+      .first-run {
+        padding: 20px;
+      }
+
+      .download-heading {
+        align-items: flex-start;
+      }
+    }
+
+    /*
+      Motion is decorative only. Nothing is hidden while waiting
+      for JavaScript or scrolling, and hash targets remain visible.
+    */
+    @media (prefers-reduced-motion: no-preference) {
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .hero .screenshot {
+        animation: settle-in 450ms ease-out;
+      }
+
+      .button {
+        transition:
+          background-color 160ms ease,
+          border-color 160ms ease,
+          transform 160ms ease;
+      }
+
+      @keyframes settle-in {
+        from { transform: translateY(8px); }
+        to { transform: translateY(0); }
+      }
+    }
+
+    @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+      .button:hover {
+        transform: translateY(-2px);
+      }
+
+      .button:active {
+        transform: translateY(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="./" aria-label="BloxNest home">
+        <img src="assets/logo.svg" width="33" height="33" alt="">
+        <span>BloxNest</span>
+      </a>
+
+      <nav class="navigation" aria-label="Main navigation">
+        <a href="#start">How to start</a>
+        <a href="#privacy">Privacy</a>
+        <a href="https://github.com/yub1dumb/BloxNest">Source code</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <div class="container">
+      <section class="hero" aria-labelledby="hero-title">
+        <div>
+          <p class="byline">A Windows app by xRed1</p>
+          <h1 id="hero-title">Open multiple <span>Roblox windows.</span></h1>
+
+          <p class="hero-description">
+            BloxNest opens several Roblox windows so you can use a
+            different account in each. It’s free and open-source,
+            with no installer.
+          </p>
+
+          <p class="launch-note">
+            Choose 1–5 windows with a click, or enter a number up to 20.
+            <strong>Starting a batch closes your existing Roblox windows.</strong>
+            Finish what you’re doing in-game first.
+          </p>
+
+          <div class="actions">
+            <a class="button"
+               href="https://github.com/yub1dumb/BloxNest/releases/latest/download/BloxNest.exe">
+              <svg width="18" height="18" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="1.8"
+                   stroke-linecap="round" stroke-linejoin="round"
+                   aria-hidden="true" focusable="false">
+                <path d="M12 3v12m-5-5 5 5 5-5M4 16v4h16v-4"/>
+              </svg>
+              Download BloxNest.exe
+            </a>
+            <a class="action-link"
+               href="https://github.com/yub1dumb/BloxNest/releases">
+              See releases on GitHub
+            </a>
+          </div>
+
+          <p class="download-meta">
+            Windows 10 and 11 only · About 160 KB · MIT licence
+          </p>
+
+          <p class="download-warning">
+            <strong>The app isn’t code-signed yet.</strong>
+            Windows may warn you before it runs.
+            <a href="#first-run">Read the first-run note</a>
+            before deciding to open it.
+          </p>
+        </div>
+
+        <figure class="screenshot">
+          <img src="assets/app-main.png"
+               width="440" height="444"
+               fetchpriority="high"
+               alt="BloxNest with a count of six, a “Close Roblox &amp; open 6” button, and a status reporting six Roblox windows running.">
+          <figcaption>
+            The main window, with six windows selected.
+            <br>
+            <a href="assets/app-main.png">View the main screenshot full size</a>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="section" id="start" aria-labelledby="start-title">
+        <h2 id="start-title">How to start</h2>
+        <p class="section-intro">
+          BloxNest is a single executable. Save it somewhere you want
+          to keep it, then run it when you need multiple windows.
+        </p>
+
+        <div class="setup-layout">
+          <ol class="steps">
+            <li>
+              <h3>Download the file from GitHub</h3>
+              <p>
+                The download button links directly to
+                <strong>BloxNest.exe</strong> in the latest GitHub release.
+                You can also
+                <a href="https://github.com/yub1dumb/BloxNest/releases">read the release information</a>
+                before downloading.
+              </p>
+            </li>
+            <li>
+              <h3>Read the warning, then decide whether to run it</h3>
+              <p>
+                There’s no setup wizard. Open BloxNest.exe if you
+                choose to proceed after reading the
+                <a href="#first-run">first-run note</a>.
+              </p>
+            </li>
+            <li>
+              <h3>Choose a count and open Roblox</h3>
+              <p>
+                Finish anything in your current Roblox windows first:
+                the opening button closes them before starting the
+                selected number.
+              </p>
+              <p>
+                Use a <strong>different Roblox account in each window</strong>.
+                Using the same account twice kicks you out of one session.
+                Start with a few windows—each one uses memory.
+              </p>
+            </li>
+          </ol>
+
+          <aside class="first-run" id="first-run"
+                 aria-labelledby="first-run-title">
+            <h3 id="first-run-title">“Windows protected your PC”</h3>
+            <p>
+              BloxNest isn’t code-signed yet. Windows may show this
+              warning on the first run.
+            </p>
+            <p>
+              Check that the file came from the linked
+              <a href="https://github.com/yub1dumb/BloxNest/releases">GitHub releases</a>.
+              The
+              <a href="https://github.com/yub1dumb/BloxNest">source code</a>
+              is public, but that alone doesn’t prove a downloaded
+              executable is safe or matches the source.
+            </p>
+            <p>
+              If you’ve checked the release and choose to proceed,
+              select <strong>“More info”</strong>, then
+              <strong>“Run anyway”</strong>, if Windows offers those options.
+            </p>
+            <p>
+              <strong>If you’re unsure, don’t run it.</strong>
+              You don’t need to disable Windows security to use this page.
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section settings-layout"
+               aria-labelledby="settings-title">
+        <div>
+          <h2 id="settings-title">What you can change</h2>
+          <p class="section-intro">
+            The Options screen controls timing, Roblox updates, and
+            what happens when you close BloxNest. Your choices are
+            saved for next time.
+          </p>
+
+          <dl class="settings-list">
+            <div>
+              <dt>Time between windows</dt>
+              <dd>
+                Choose 3, 5, or 8 seconds. A longer delay gives a slower
+                PC more time to open each window.
+              </dd>
+            </div>
+            <div>
+              <dt>Update Roblox before opening</dt>
+              <dd>
+                When enabled, BloxNest checks Roblox’s latest version.
+                If an update is needed, it checks that your existing
+                Roblox updater is signed by Roblox Corporation before
+                running it.
+              </dd>
+            </div>
+            <div>
+              <dt>Roblox update alerts</dt>
+              <dd>
+                When enabled, BloxNest checks every 30 minutes while
+                running and tells you when Roblox updates.
+              </dd>
+            </div>
+            <div>
+              <dt>Keep running in hidden icons</dt>
+              <dd>
+                Closing the BloxNest window can leave it running in
+                the system tray. Right-click its icon to open or quit.
+                Launching BloxNest again brings back the running app.
+              </dd>
+            </div>
+          </dl>
+        </div>
+
+        <figure class="screenshot">
+          <img src="assets/app-options.png"
+               width="440" height="510"
+               loading="lazy" decoding="async"
+               alt="BloxNest Options with switches for keeping the app in hidden icons, updating Roblox before opening, and update alerts, plus 3, 5, and 8 second delays.">
+          <figcaption>
+            The Options screen.
+            <br>
+            <a href="assets/app-options.png">View the options screenshot full size</a>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="section privacy-layout" id="privacy"
+               aria-labelledby="privacy-title">
+        <div>
+          <h2 id="privacy-title">Privacy</h2>
+          <p class="section-intro">
+            BloxNest doesn’t collect, store, or send your Roblox
+            account details, passwords, or cookies. It has no
+            analytics or tracking.
+          </p>
+          <p class="section-intro">
+            It does contact Roblox for version checks. That is
+            separate from collecting account information.
+          </p>
+
+          <div class="privacy-links">
+            <a href="https://github.com/yub1dumb/BloxNest">
+              Read the source
+            </a>
+            <a href="https://github.com/yub1dumb/BloxNest/blob/main/PRIVACY.md">
+              Full privacy text
+            </a>
+          </div>
+        </div>
+
+        <dl class="privacy-list">
+          <div>
+            <dt>Version checks go to Roblox</dt>
+            <dd>
+              BloxNest only contacts Roblox’s own server to check
+              the newest version. It doesn’t download Roblox installers
+              or update packages itself. When needed and enabled, it
+              runs the Roblox updater already on your PC after checking
+              its signature.
+            </dd>
+          </div>
+          <div>
+            <dt>No injection or direct game-file changes</dt>
+            <dd>
+              BloxNest opens Roblox and stops its “only one window”
+              check from closing the extra windows. BloxNest itself
+              doesn’t modify Roblox’s files or inject code into the
+              game. Roblox’s updater handles any game updates.
+            </dd>
+          </div>
+          <div>
+            <dt>Preferences are saved locally</dt>
+            <dd>
+              BloxNest saves your options in your AppData folder.
+              That preferences file is the only file BloxNest itself saves.
+            </dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="section story-layout" id="story" aria-labelledby="story-title">
+        <div class="story">
+          <h2 id="story-title">Why I made this</h2>
+          <p>
+            Hey, I’m xRed1. I’m a student and just a regular dude.
+            I always wanted my alt account open in a second window,
+            playing music for me and my friends while we hang out.
+            Roblox only lets you open one window, so I made BloxNest.
+          </p>
+          <p>
+            I built it on my own, with no budget, and it’s free.
+          </p>
+        </div>
+
+        <aside class="donate-card" aria-labelledby="donate-title">
+          <h3 id="donate-title">Want to support it?</h3>
+          <p>
+            If BloxNest helped you and you want to chip in,
+            even $1 means a lot to me.
+          </p>
+          <a class="donate-email"
+             href="mailto:juneclark.lm@gmail.com?subject=BloxNest%20donation">
+            juneclark.lm@gmail.com
+          </a>
+          <p class="donate-note">
+            Totally optional. The app works the same either way.
+          </p>
+        </aside>
+      </section>
+
+      <section class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">Questions before downloading</h2>
+
+        <div class="faq-list">
+          <details open>
+            <summary>Can I get banned?</summary>
+            <p>
+              BloxNest doesn’t modify Roblox or inject anything,
+              but it isn’t made or approved by Roblox.
+              Nobody can promise anything. Use it at your own risk.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can I use the same account in two windows?</summary>
+            <p>
+              No. Using the same Roblox account twice kicks you out
+              of one session. Use a different account in each window.
+            </p>
+          </details>
+
+          <details>
+            <summary>How many windows should I open?</summary>
+            <p>
+              You can choose 1–5 with a click or enter a number up to 20.
+              That is the app’s limit, not a promise that your PC can
+              run 20 comfortably. Every Roblox window uses memory.
+              Start small.
+            </p>
+          </details>
+
+          <details>
+            <summary>Why does Windows show a warning?</summary>
+            <p>
+              BloxNest isn’t code-signed yet, so Windows may show
+              “Windows protected your PC.” Read the
+              <a href="#first-run">first-run note</a> and check the release
+              information before deciding whether to run it.
+            </p>
+          </details>
+
+          <details>
+            <summary>Does BloxNest download Roblox updates?</summary>
+            <p>
+              It retrieves version information, not Roblox update
+              packages. With updating before opening enabled, it runs
+              the Roblox updater already on your PC when needed,
+              after checking that it’s signed by Roblox Corporation.
+              The Roblox updater handles the download.
+            </p>
+          </details>
+
+          <details>
+            <summary>I closed BloxNest. Why is it still running?</summary>
+            <p>
+              With “keep running in hidden icons” enabled, closing
+              the window leaves BloxNest in the system tray.
+              Right-click its icon to open or quit. Launching BloxNest
+              again brings back the running app rather than starting
+              another copy.
+            </p>
+          </details>
+
+          <details>
+            <summary>Is it free, and what does it run on?</summary>
+            <p>
+              Yes. BloxNest is free and open-source under the MIT
+              licence, made by xRed1. It runs on Windows 10 and 11.
+              The executable is about 160 KB and has no installer.
+              It does not run on phones.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section class="section download-section"
+               aria-labelledby="download-title">
+        <div class="download-heading">
+          <img src="assets/icon-256.png"
+               width="48" height="48" loading="lazy" alt="">
+          <div>
+            <h2 id="download-title">Download BloxNest</h2>
+            <p>Windows 10 and 11 · About 160 KB</p>
+          </div>
+        </div>
+
+        <div class="actions">
+          <a class="button"
+             href="https://github.com/yub1dumb/BloxNest/releases/latest/download/BloxNest.exe">
+            Download BloxNest.exe
+          </a>
+          <a class="action-link"
+             href="https://github.com/yub1dumb/BloxNest/releases">
+            GitHub releases
+          </a>
+        </div>
+
+        <p class="download-reminder">
+          Not code-signed yet.
+          <a href="#first-run">Read the Windows first-run note.</a>
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <p><strong>BloxNest</strong> · Made by xRed1 · MIT licence</p>
+
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="https://github.com/yub1dumb/BloxNest">Source code</a>
+          <a href="https://github.com/yub1dumb/BloxNest/releases">Releases</a>
+          <a href="#privacy">Privacy</a>
+          <a href="#story">Support</a>
+        </nav>
+      </div>
+
+      <p class="disclaimer">
+        Not affiliated with or endorsed by Roblox Corporation.
+        Roblox is a trademark of Roblox Corporation.
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
