@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/assets/icon-256.png" width="96" alt="BloxNest logo">
+  <img src="assets/icon-256.png" width="96" alt="BloxNest logo">
 </p>
 
 <h1 align="center">BloxNest</h1>
@@ -10,15 +10,15 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/yub1dumb/BloxNest/releases/latest/download/BloxNest.exe"><b>Download BloxNest.exe</b></a>
+  <a href="https://github.com/bloxnest/BloxNest/releases/latest/download/BloxNest.exe"><b>Download BloxNest.exe</b></a>
   &nbsp;·&nbsp;
-  <a href="https://yub1dumb.github.io/BloxNest/">Website</a>
+  <a href="https://bloxnest.github.io/">Website</a>
   &nbsp;·&nbsp;
   <a href="PRIVACY.md">Privacy</a>
 </p>
 
 <p align="center">
-  <img src="docs/assets/app-main.png" width="440" alt="BloxNest with six Roblox windows running">
+  <img src="assets/app-main.png" width="440" alt="BloxNest with six Roblox windows running">
 </p>
 
 ## What it does
