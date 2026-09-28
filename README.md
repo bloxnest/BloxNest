@@ -2,11 +2,11 @@
   <img src="assets/icon-256.png" width="96" alt="BloxNest logo">
 </p>
 
-<h1 align="center">BloxNest</h1>
+<h1 align="center">BloxNest: Roblox multi-instance for Windows</h1>
 
 <p align="center">
-  Open more than one Roblox window at once, so you can use a different account in each.<br>
-  Free, open source, one small file. Windows 10 and 11.
+  Open two (or more) Roblox windows at the same time and play on several accounts at once.<br>
+  Free, one small file, nothing to install. Windows 10 and 11.
 </p>
 
 <p align="center">
@@ -18,10 +18,12 @@
 </p>
 
 <p align="center">
-  <img src="assets/app-main.png" width="440" alt="BloxNest with six Roblox windows running">
+  <img src="assets/app-main.png" width="440" alt="BloxNest running six Roblox windows at once">
 </p>
 
 ## What it does
+
+Roblox normally only lets you open one window. BloxNest is a multi-instance launcher: it opens as many Roblox windows as you want, so you can run your main and your alts side by side.
 
 - Pick 1 to 5 windows with one click, or type any number up to 20.
 - Keeps Roblox up to date: checks the newest version first and, if yours is behind, runs the Roblox updater that's already on your PC (after checking it's signed by Roblox Corporation).
@@ -65,6 +67,8 @@ If it helped you and you want to chip in, even $1 means a lot to me: **juneclark
 
 ## Licence
 
-MIT. See [LICENSE](LICENSE).
+BloxNest is **source available, not open source**. You can read the code, build it, and use the app for personal, non-commercial use under the [PolyForm Strict License 1.0.0](LICENSE). You may **not** redistribute it, sell it, or publish modified versions or other apps based on it.
 
-Not affiliated with or endorsed by Roblox Corporation. Roblox is a trademark of Roblox Corporation.
+The BloxNest name and logo belong to xRed1 and aren't covered by the licence. The official download is only on this repository's [Releases page](https://github.com/bloxnest/BloxNest/releases) and [bloxnest.github.io](https://bloxnest.github.io/).
+
+Copyright (c) 2026 xRed1. Not affiliated with or endorsed by Roblox Corporation. Roblox is a trademark of Roblox Corporation.
