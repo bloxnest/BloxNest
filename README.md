@@ -2,17 +2,19 @@
   <img src="assets/icon-256.png" width="96" alt="BloxNest logo">
 </p>
 
-<h1 align="center">BloxNest: Roblox multi-instance for Windows</h1>
+<h1 align="center">BloxNest</h1>
 
 <p align="center">
-  Open two (or more) Roblox windows at the same time and play on several accounts at once.<br>
+  BloxNest is a Windows utility for opening multiple Roblox windows side by side.<br>
   Free, one small file, nothing to install. Windows 10 and 11.
 </p>
 
 <p align="center">
+  <b>Official website: <a href="https://bloxnest.github.io/">https://bloxnest.github.io/</a></b>
+</p>
+
+<p align="center">
   <a href="https://github.com/bloxnest/BloxNest/releases/latest/download/BloxNest.exe"><b>Download BloxNest.exe</b></a>
-  &nbsp;·&nbsp;
-  <a href="https://bloxnest.github.io/">Website</a>
   &nbsp;·&nbsp;
   <a href="PRIVACY.md">Privacy</a>
 </p>
